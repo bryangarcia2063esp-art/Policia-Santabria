@@ -1,0 +1,31 @@
+<section class="ranks-section" id="ranks">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Jerarquía Oficial</span>
+      <h2 class="section-title">RANGOS DEL <span>DEPARTAMENTO</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Estructura jerárquica del Cuerpo Nacional de Policía en el servidor Santabria FiveM</p>
+    </div>
+
+    <div class="ranks-grid">
+      <div class="rank-card" *ngFor="let rank of ranks" [ngStyle]="{'--rank-color': rank.color}">
+        <div class="rank-card-header">
+          <div class="rank-icon">
+            <i [class]="rank.icon"></i>
+          </div>
+          <div class="rank-level">NV.{{ rank.level }}</div>
+        </div>
+        <div class="rank-card-body">
+          <h3 class="rank-name">{{ rank.name }}</h3>
+          <p class="rank-description">{{ rank.description }}</p>
+          <div class="rank-perks">
+            <span *ngFor="let perk of rank.perks" class="perk-badge">
+              <i class="fas fa-check"></i> {{ perk }}
+            </span>
+          </div>
+        </div>
+        <div class="rank-card-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>

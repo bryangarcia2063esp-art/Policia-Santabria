@@ -1,0 +1,128 @@
+<section class="apply-section" id="apply">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Formulario Oficial</span>
+      <h2 class="section-title">SOLICITUD DE <span>INGRESO</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Completa el formulario para iniciar tu proceso de selección</p>
+    </div>
+
+    <div class="form-wrapper">
+
+      <!-- Success Message -->
+      <div class="form-success" *ngIf="submitted">
+        <div class="success-icon"><i class="fas fa-badge-check"></i></div>
+        <h3>Solicitud Enviada</h3>
+        <p>Tu solicitud ha sido recibida. El equipo de RRHH se pondrá en contacto contigo por Discord en las próximas 48 horas.</p>
+        <button class="btn btn-outline" (click)="resetForm()">Enviar otra solicitud</button>
+      </div>
+
+      <form class="apply-form" (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="!submitted">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="name">
+              <i class="fas fa-user"></i> Nombre en el servidor
+            </label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Tu nombre de roleplay"
+              [class.error]="isFieldInvalid('name')" />
+            <span class="field-error" *ngIf="isFieldInvalid('name')">Campo obligatorio</span>
+          </div>
+
+          <div class="form-group">
+            <label for="age">
+              <i class="fas fa-calendar-days"></i> Edad real
+            </label>
+            <input
+              id="age"
+              type="number"
+              formControlName="age"
+              placeholder="Tu edad (mín. 16)"
+              [class.error]="isFieldInvalid('age')" />
+            <span class="field-error" *ngIf="isFieldInvalid('age')">Debes tener mínimo 16 años</span>
+          </div>
+
+          <div class="form-group">
+            <label for="discord">
+              <i class="fab fa-discord"></i> Usuario de Discord
+            </label>
+            <input
+              id="discord"
+              type="text"
+              formControlName="discord"
+              placeholder="usuario#0000 o @usuario"
+              [class.error]="isFieldInvalid('discord')" />
+            <span class="field-error" *ngIf="isFieldInvalid('discord')">Campo obligatorio</span>
+          </div>
+
+          <div class="form-group">
+            <label for="rpExperience">
+              <i class="fas fa-star"></i> Experiencia en RP
+            </label>
+            <select
+              id="rpExperience"
+              formControlName="rpExperience"
+              [class.error]="isFieldInvalid('rpExperience')">
+              <option value="">Selecciona tu nivel</option>
+              <option value="ninguna">Sin experiencia previa</option>
+              <option value="basica">Básica (menos de 6 meses)</option>
+              <option value="media">Media (6 meses - 1 año)</option>
+              <option value="avanzada">Avanzada (más de 1 año)</option>
+              <option value="experto">Experto (más de 2 años)</option>
+            </select>
+            <span class="field-error" *ngIf="isFieldInvalid('rpExperience')">Selecciona una opción</span>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="previousUnit">
+              <i class="fas fa-shield-halved"></i> ¿Has formado parte de alguna unidad policial en RP?
+            </label>
+            <input
+              id="previousUnit"
+              type="text"
+              formControlName="previousUnit"
+              placeholder="Nombre del servidor o escribe 'No'" />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="motivation">
+              <i class="fas fa-message"></i> ¿Por qué quieres ser policía en Santabria?
+            </label>
+            <textarea
+              id="motivation"
+              formControlName="motivation"
+              rows="5"
+              placeholder="Cuéntanos tus motivaciones, qué aportarías al departamento y por qué crees que serías un buen policía..."
+              [class.error]="isFieldInvalid('motivation')"></textarea>
+            <div class="char-counter">{{ form.get('motivation')?.value?.length || 0 }} / 500</div>
+            <span class="field-error" *ngIf="isFieldInvalid('motivation')">Mínimo 50 caracteres requeridos</span>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="acceptRules" />
+              <span class="checkmark"></span>
+              He leído y acepto la normativa interna del Departamento de Policía de Santabria
+            </label>
+            <span class="field-error" *ngIf="isFieldInvalid('acceptRules')">Debes aceptar la normativa</span>
+          </div>
+
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn-gold" [disabled]="isSubmitting">
+            <i class="fas fa-paper-plane" *ngIf="!isSubmitting"></i>
+            <i class="fas fa-spinner fa-spin" *ngIf="isSubmitting"></i>
+            {{ isSubmitting ? 'Enviando...' : 'Enviar Solicitud' }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>

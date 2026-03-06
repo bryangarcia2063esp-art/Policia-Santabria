@@ -1,0 +1,192 @@
+.footer {
+  background: #030912;
+  border-top: 1px solid rgba(26,86,196,0.2);
+}
+
+.footer-top { padding: 64px 0 40px; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.4fr;
+  gap: 48px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.footer-logo > i { font-size: 2.2rem; color: var(--accent-bright); }
+
+.brand-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--white);
+  display: block;
+  letter-spacing: 0.15em;
+}
+
+.brand-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem;
+  color: var(--accent-bright);
+  letter-spacing: 0.25em;
+  display: block;
+  margin-top: 2px;
+}
+
+.brand-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.social-links { display: flex; gap: 10px; }
+
+.social-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+}
+
+.social-btn:hover { transform: translateY(-3px); }
+.social-btn.discord:hover { background: rgba(88,101,242,0.22); color: #7289da; border-color: rgba(88,101,242,0.35); }
+.social-btn.twitter:hover { background: rgba(255,255,255,0.09); color: var(--white); }
+.social-btn.instagram:hover { background: rgba(225,48,108,0.14); color: #e1306c; border-color: rgba(225,48,108,0.28); }
+.social-btn.youtube:hover { background: rgba(255,0,0,0.1); color: #ff4444; border-color: rgba(255,0,0,0.22); }
+
+.footer-col-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--accent-bright);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover { color: var(--white); padding-left: 4px; }
+.footer-links a i { font-size: 0.6rem; color: var(--accent); }
+
+.discord-widget {
+  background: rgba(88,101,242,0.06);
+  border: 1px solid rgba(88,101,242,0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.discord-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(88,101,242,0.1);
+  border-bottom: 1px solid rgba(88,101,242,0.15);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+
+.discord-widget-header i { color: #7289da; font-size: 1.1rem; }
+
+.discord-widget-body { padding: 16px; }
+
+.online-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #66bb6a;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #66bb6a;
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(102,187,106,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(102,187,106,0); }
+}
+
+.discord-widget-body p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.discord-join-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #5865f2;
+  color: var(--white);
+  text-decoration: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.discord-join-btn:hover { background: #4752c4; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(26,86,196,0.1);
+  padding: 20px 0;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.copyright { font-size: 0.8rem; color: var(--text-secondary); }
+.disclaimer { font-size: 0.75rem; color: rgba(122,150,192,0.45); font-style: italic; }
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-brand { grid-column: 1; }
+  .footer-bottom-content { flex-direction: column; text-align: center; }
+}

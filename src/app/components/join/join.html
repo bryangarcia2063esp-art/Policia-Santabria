@@ -1,0 +1,58 @@
+<section class="join-section" id="join">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Proceso de Selección</span>
+      <h2 class="section-title">ÚNETE AL <span>CUERPO</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Sigue estos pasos para formar parte de la Policía de Santabria</p>
+    </div>
+
+    <div class="join-content">
+
+      <!-- Requirements -->
+      <div class="requirements-box">
+        <div class="req-header">
+          <i class="fas fa-clipboard-check"></i>
+          <h3>Requisitos Mínimos</h3>
+        </div>
+        <ul class="req-list">
+          <li *ngFor="let req of requirements">
+            <i class="fas fa-check-circle"></i>
+            <span>{{ req }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps-container">
+        <div class="step" *ngFor="let step of steps; let i = index">
+          <div class="step-connector" *ngIf="i < steps.length - 1"></div>
+          <div class="step-icon">
+            <i [class]="step.icon"></i>
+          </div>
+          <div class="step-content">
+            <div class="step-number">PASO {{ i + 1 }}</div>
+            <h4 class="step-title">{{ step.title }}</h4>
+            <p class="step-desc">{{ step.description }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Discord CTA -->
+    <div class="discord-cta">
+      <div class="discord-icon">
+        <i class="fab fa-discord"></i>
+      </div>
+      <div class="discord-text">
+        <h3>¿Listo para unirte?</h3>
+        <p>Accede a nuestro servidor de Discord y abre un ticket de solicitud en el canal correspondiente</p>
+      </div>
+      <a href="#" class="btn btn-primary discord-btn">
+        <i class="fab fa-discord"></i> Unirse al Discord
+      </a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,84 @@
+<section class="regulations-section" id="regulations">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Marco Legal</span>
+      <h2 class="section-title">NORMATIVAS <span>INTERNAS</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Reglamento oficial del Departamento de Policía de Santabria</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="reg-tabs">
+      <button
+        *ngFor="let tab of tabs"
+        class="reg-tab"
+        [class.active]="activeTab === tab.id"
+        (click)="setTab(tab.id)">
+        <i [class]="tab.icon"></i> {{ tab.label }}
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="reg-content">
+
+      <!-- General -->
+      <div class="reg-panel" *ngIf="activeTab === 'general'">
+        <div class="reg-card" *ngFor="let rule of generalRules">
+          <div class="reg-card-icon">
+            <i [class]="rule.icon"></i>
+          </div>
+          <div class="reg-card-content">
+            <h4>{{ rule.title }}</h4>
+            <p>{{ rule.text }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disciplinary -->
+      <div class="reg-panel" *ngIf="activeTab === 'discipline'">
+        <div class="discipline-grid">
+          <div class="discipline-card mild">
+            <div class="discipline-header">
+              <i class="fas fa-circle-exclamation"></i>
+              <h3>Faltas Leves</h3>
+            </div>
+            <ul>
+              <li *ngFor="let item of lightOffenses"><i class="fas fa-dot-circle"></i> {{ item }}</li>
+            </ul>
+            <div class="discipline-sanctions">
+              <h4>Sanciones:</h4>
+              <p>Amonestación verbal o escrita · Advertencia formal · Suspensión hasta 3 días</p>
+            </div>
+          </div>
+          <div class="discipline-card severe">
+            <div class="discipline-header">
+              <i class="fas fa-triangle-exclamation"></i>
+              <h3>Faltas Graves</h3>
+            </div>
+            <ul>
+              <li *ngFor="let item of heavyOffenses"><i class="fas fa-dot-circle"></i> {{ item }}</li>
+            </ul>
+            <div class="discipline-sanctions">
+              <h4>Sanciones:</h4>
+              <p>Degradación de rango · Suspensión 6-10 días · Expulsión de unidad · Supervisión permanente</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operations -->
+      <div class="reg-panel" *ngIf="activeTab === 'operations'">
+        <div class="ops-grid">
+          <div class="ops-card" *ngFor="let op of operationalRules">
+            <div class="ops-number">{{ op.article }}</div>
+            <div class="ops-content">
+              <h4>{{ op.title }}</h4>
+              <p>{{ op.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

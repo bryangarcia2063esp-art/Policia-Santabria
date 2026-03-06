@@ -1,0 +1,41 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="nav-container">
+
+    <div class="nav-logo" (click)="scrollTo('hero')">
+      <img src="logo.png" alt="Policía Santabria" class="logo-img" />
+      <div class="logo-text">
+        <span class="logo-main">POLICÍA</span>
+        <span class="logo-sub">SANTABRIA · FIVEM</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a (click)="scrollTo('hero')"><i class="fas fa-house"></i> Inicio</a></li>
+      <li><a (click)="scrollTo('ranks')"><i class="fas fa-medal"></i> Rangos</a></li>
+      <li><a (click)="scrollTo('units')"><i class="fas fa-users-gear"></i> Unidades</a></li>
+      <li><a (click)="scrollTo('regulations')"><i class="fas fa-book-open"></i> Normativas</a></li>
+      <li><a (click)="scrollTo('join')"><i class="fas fa-user-plus"></i> Unirse</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a class="btn-nav-cta" (click)="scrollTo('apply')">
+        <i class="fas fa-file-signature"></i> Aplicar
+      </a>
+      <button class="hamburger" [class.open]="menuOpen" (click)="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="mobile-menu" [class.open]="menuOpen">
+    <ul>
+      <li><a (click)="scrollTo('hero')"><i class="fas fa-house"></i> Inicio</a></li>
+      <li><a (click)="scrollTo('ranks')"><i class="fas fa-medal"></i> Rangos</a></li>
+      <li><a (click)="scrollTo('units')"><i class="fas fa-users-gear"></i> Unidades</a></li>
+      <li><a (click)="scrollTo('regulations')"><i class="fas fa-book-open"></i> Normativas</a></li>
+      <li><a (click)="scrollTo('join')"><i class="fas fa-user-plus"></i> Unirse</a></li>
+      <li><a (click)="scrollTo('apply')"><i class="fas fa-file-signature"></i> Aplicar Ahora</a></li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,39 @@
+<section class="units-section" id="units">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Fuerzas Especiales</span>
+      <h2 class="section-title">UNIDADES <span>OPERATIVAS</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Divisiones especializadas del Cuerpo Nacional de Policía de Santabria</p>
+    </div>
+
+    <div class="units-grid">
+      <div class="unit-card" *ngFor="let unit of units">
+        <div class="unit-header" [ngStyle]="{'background': unit.gradient}">
+          <div class="unit-emblem">
+            <i [class]="unit.icon"></i>
+          </div>
+          <div class="unit-tag">{{ unit.tag }}</div>
+        </div>
+        <div class="unit-body">
+          <h3 class="unit-name">{{ unit.name }}</h3>
+          <p class="unit-full-name">{{ unit.fullName }}</p>
+          <p class="unit-description">{{ unit.description }}</p>
+          <div class="unit-functions">
+            <h4>Funciones Principales:</h4>
+            <ul>
+              <li *ngFor="let fn of unit.functions">
+                <i class="fas fa-chevron-right"></i> {{ fn }}
+              </li>
+            </ul>
+          </div>
+          <div class="unit-groups" *ngIf="unit.groups.length > 0">
+            <span class="group-badge" *ngFor="let group of unit.groups">
+              {{ group }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

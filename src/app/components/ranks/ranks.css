@@ -1,0 +1,116 @@
+.ranks-section {
+  background: linear-gradient(180deg, var(--primary) 0%, rgba(10, 30, 58, 0.4) 50%, var(--primary) 100%);
+}
+
+.ranks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 22px;
+}
+
+.rank-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-top: 3px solid var(--rank-color, var(--accent));
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.rank-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--rank-color, var(--accent));
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 20px rgba(26,86,196,0.15);
+}
+
+.rank-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(26,86,196,0.08), transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rank-card:hover .rank-card-glow { opacity: 1; }
+
+.rank-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+}
+
+.rank-icon {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, rgba(26,86,196,0.2), rgba(26,86,196,0.05));
+  border: 1px solid rgba(26,86,196,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--rank-color, var(--accent));
+  transition: all 0.3s ease;
+}
+
+.rank-card:hover .rank-icon {
+  background: linear-gradient(135deg, rgba(26,86,196,0.35), rgba(26,86,196,0.1));
+  box-shadow: 0 0 20px rgba(26,86,196,0.3);
+}
+
+.rank-level {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--rank-color, var(--accent-bright));
+  background: rgba(26,86,196,0.1);
+  border: 1px solid rgba(26,86,196,0.2);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.rank-card-body {
+  padding: 16px 20px 24px;
+}
+
+.rank-name {
+  font-size: 1.5rem;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.rank-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.rank-perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.perk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: rgba(26,86,196,0.1);
+  border: 1px solid rgba(26,86,196,0.2);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.perk-badge i { color: #66bb6a; font-size: 0.6rem; }
+
+@media (max-width: 768px) {
+  .ranks-grid { grid-template-columns: 1fr; }
+}

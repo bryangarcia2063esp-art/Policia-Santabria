@@ -1,0 +1,325 @@
+<section class="exam-section" id="exam-apply">
+  <div class="container">
+
+    <!-- ═══ INTRO ═══ -->
+    <div class="exam-stage" *ngIf="step === 'intro'">
+      <div class="intro-card">
+        <div class="intro-logo">
+          <img src="logo.png" alt="Policía Santabria" />
+        </div>
+        <div class="intro-badge">
+          <i class="fas fa-file-shield"></i>
+          <span>EXAMEN OFICIAL DE ACCESO</span>
+        </div>
+        <h1 class="intro-title">Test de Ingreso al<br><span>Cuerpo de Policía</span></h1>
+        <p class="intro-subtitle">Santabria · FiveM Roleplay</p>
+
+        <div class="intro-info-grid">
+          <div class="info-box">
+            <i class="fas fa-question-circle"></i>
+            <span class="info-value">20</span>
+            <span class="info-label">Preguntas</span>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-clock"></i>
+            <span class="info-value">20 min</span>
+            <span class="info-label">Tiempo límite</span>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-check-circle"></i>
+            <span class="info-value">70%</span>
+            <span class="info-label">Para aprobar</span>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-list-check"></i>
+            <span class="info-value">1 opción</span>
+            <span class="info-label">Por pregunta</span>
+          </div>
+        </div>
+
+        <div class="intro-rules">
+          <h3><i class="fas fa-shield-halved"></i> Instrucciones</h3>
+          <ul>
+            <li><i class="fas fa-chevron-right"></i> Lee cada pregunta con atención antes de responder</li>
+            <li><i class="fas fa-chevron-right"></i> Selecciona una única respuesta por pregunta</li>
+            <li><i class="fas fa-chevron-right"></i> Puedes navegar libremente entre preguntas</li>
+            <li><i class="fas fa-chevron-right"></i> El examen se entrega automáticamente al agotar el tiempo</li>
+            <li><i class="fas fa-chevron-right"></i> Necesitas un mínimo del 70% para ser aprobado</li>
+            <li><i class="fas fa-chevron-right"></i> Las preguntas están basadas en el reglamento oficial de la U.P.R. y G.E.O.</li>
+          </ul>
+        </div>
+
+        <button class="btn btn-gold btn-lg" (click)="startIntro()">
+          <i class="fas fa-play"></i> Comenzar Solicitud
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ DATOS PERSONALES ═══ -->
+    <div class="exam-stage" *ngIf="step === 'info'">
+      <div class="info-card">
+        <div class="info-card-header">
+          <i class="fas fa-id-card"></i>
+          <div>
+            <h2>Datos del Candidato</h2>
+            <p>Paso 1 de 2 — Información personal</p>
+          </div>
+        </div>
+
+        <form [formGroup]="infoForm" (ngSubmit)="submitInfo()" class="info-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label><i class="fas fa-user"></i> Nombre en el servidor</label>
+              <input type="text" formControlName="name" placeholder="Tu nombre de RP" [class.error]="isFieldInvalid('name')" />
+              <span class="field-error" *ngIf="isFieldInvalid('name')">Campo obligatorio (mín. 3 caracteres)</span>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-calendar"></i> Edad real</label>
+              <input type="number" formControlName="age" placeholder="Edad (mín. 16)" [class.error]="isFieldInvalid('age')" />
+              <span class="field-error" *ngIf="isFieldInvalid('age')">Debes tener mínimo 16 años</span>
+            </div>
+            <div class="form-group">
+              <label><i class="fab fa-discord"></i> Usuario de Discord</label>
+              <input type="text" formControlName="discord" placeholder="usuario o @usuario" [class.error]="isFieldInvalid('discord')" />
+              <span class="field-error" *ngIf="isFieldInvalid('discord')">Campo obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label><i class="fas fa-star"></i> Experiencia en RP</label>
+              <select formControlName="experience" [class.error]="isFieldInvalid('experience')">
+                <option value="">Selecciona tu nivel</option>
+                <option value="ninguna">Sin experiencia previa</option>
+                <option value="basica">Básica (menos de 6 meses)</option>
+                <option value="media">Media (6 meses - 1 año)</option>
+                <option value="avanzada">Avanzada (más de 1 año)</option>
+              </select>
+              <span class="field-error" *ngIf="isFieldInvalid('experience')">Selecciona una opción</span>
+            </div>
+          </div>
+
+          <div class="info-disclaimer">
+            <i class="fas fa-circle-info"></i>
+            <p>A continuación realizarás un test de 15 preguntas sobre el reglamento oficial del Departamento de Policía de Santabria. El resultado será automático.</p>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" (click)="step = 'intro'">
+              <i class="fas fa-arrow-left"></i> Volver
+            </button>
+            <button type="submit" class="btn btn-gold">
+              <i class="fas fa-arrow-right"></i> Ir al Examen
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══ EXAMEN ═══ -->
+    <div class="exam-stage" *ngIf="step === 'exam'">
+
+      <!-- Header barra fija -->
+      <div class="exam-header">
+        <div class="exam-header-left">
+          <img src="logo.png" alt="Logo" class="exam-logo" />
+          <div>
+            <div class="exam-header-title">TEST DE INGRESO</div>
+            <div class="exam-header-sub">Policía de Santabria</div>
+          </div>
+        </div>
+        <div class="exam-header-center">
+          <div class="exam-progress-bar">
+            <div class="exam-progress-fill" [style.width.%]="progress"></div>
+          </div>
+          <div class="exam-progress-text">{{ answeredCount }} / {{ questions.length }} respondidas</div>
+        </div>
+        <div class="exam-timer" [class.warning]="timeWarning">
+          <i class="fas fa-clock"></i>
+          <span>{{ timeFormatted }}</span>
+        </div>
+      </div>
+
+      <div class="exam-body">
+
+        <!-- Navegador de preguntas -->
+        <div class="question-nav">
+          <div class="nav-title">Preguntas</div>
+          <div class="nav-grid">
+            <button
+              *ngFor="let q of questions; let i = index"
+              class="nav-btn"
+              [class.active]="currentQuestion === i"
+              [class.answered]="q.selected !== null"
+              (click)="goTo(i)">
+              {{ i + 1 }}
+            </button>
+          </div>
+          <div class="nav-legend">
+            <span class="legend-item"><span class="legend-dot answered"></span> Respondida</span>
+            <span class="legend-item"><span class="legend-dot active"></span> Actual</span>
+            <span class="legend-item"><span class="legend-dot"></span> Sin responder</span>
+          </div>
+          <button class="btn btn-gold btn-submit-exam" (click)="submitExam()">
+            <i class="fas fa-paper-plane"></i> Entregar Examen
+          </button>
+        </div>
+
+        <!-- Pregunta actual -->
+        <div class="question-area">
+          <div class="question-meta">
+            <span class="question-category">
+              <i class="fas fa-tag"></i> {{ questions[currentQuestion].category }}
+            </span>
+            <span class="question-counter">Pregunta {{ currentQuestion + 1 }} de {{ questions.length }}</span>
+          </div>
+
+          <h2 class="question-text">{{ questions[currentQuestion].text }}</h2>
+
+          <div class="answers-list">
+            <button
+              *ngFor="let answer of questions[currentQuestion].answers; let ai = index"
+              class="answer-btn"
+              [class.selected]="questions[currentQuestion].selected === ai"
+              (click)="selectAnswer(currentQuestion, ai)">
+              <span class="answer-letter">{{ ['A','B','C','D'][ai] }}</span>
+              <span class="answer-text">{{ answer.text }}</span>
+              <i class="fas fa-check answer-check" *ngIf="questions[currentQuestion].selected === ai"></i>
+            </button>
+          </div>
+
+          <div class="question-navigation">
+            <button class="btn btn-outline" (click)="prevQuestion()" [disabled]="currentQuestion === 0">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button class="btn btn-primary" (click)="nextQuestion()" *ngIf="currentQuestion < questions.length - 1">
+              Siguiente <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-gold" (click)="submitExam()" *ngIf="currentQuestion === questions.length - 1">
+              <i class="fas fa-paper-plane"></i> Entregar
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ RESULTADO ═══ -->
+    <div class="exam-stage" *ngIf="step === 'result'">
+      <div class="result-card" [class.approved]="approved" [class.rejected]="!approved">
+
+        <!-- Banner resultado -->
+        <div class="result-banner">
+          <div class="result-icon" [class.approved]="approved" [class.rejected]="!approved">
+            <i class="fas fa-shield-check" *ngIf="approved"></i>
+            <i class="fas fa-shield-xmark" *ngIf="!approved"></i>
+          </div>
+          <div class="result-verdict">
+            <h1 *ngIf="approved">CANDIDATO APROBADO</h1>
+            <h1 *ngIf="!approved">CANDIDATO NO APROBADO</h1>
+            <p *ngIf="approved">Felicidades, {{ infoForm.get('name')?.value }}. Has superado el test de acceso al Cuerpo de Policía de Santabria.</p>
+            <p *ngIf="!approved">{{ infoForm.get('name')?.value }}, no has alcanzado la puntuación mínima requerida. Puedes volver a intentarlo.</p>
+          </div>
+        </div>
+
+        <!-- Puntuación circular -->
+        <div class="result-score-area">
+          <div class="score-circle" [class]="scoreClass">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+              <circle cx="60" cy="60" r="52" fill="none"
+                [attr.stroke]="approved ? '#c9a227' : '#e53935'"
+                stroke-width="8"
+                stroke-linecap="round"
+                stroke-dasharray="326.7"
+                [attr.stroke-dashoffset]="326.7 - (326.7 * score / 100)"
+                transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="score-number">{{ score }}%</div>
+          </div>
+          <div class="score-details">
+            <div class="score-stat">
+              <span class="score-val correct">{{ correctCount }}</span>
+              <span class="score-lbl">Correctas</span>
+            </div>
+            <div class="score-stat">
+              <span class="score-val wrong">{{ questions.length - correctCount }}</span>
+              <span class="score-lbl">Incorrectas</span>
+            </div>
+            <div class="score-stat">
+              <span class="score-val total">{{ questions.length }}</span>
+              <span class="score-lbl">Total</span>
+            </div>
+            <div class="score-stat">
+              <span class="score-val required">70%</span>
+              <span class="score-lbl">Mínimo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Próximos pasos -->
+        <div class="result-next approved-steps" *ngIf="approved">
+          <h3><i class="fas fa-list-check"></i> Próximos pasos</h3>
+          <ol>
+            <li><i class="fas fa-check"></i> Abre un ticket en el Discord del servidor mencionando que has superado el test</li>
+            <li><i class="fas fa-check"></i> Proporciona tu usuario de Discord: <strong>{{ infoForm.get('discord')?.value }}</strong></li>
+            <li><i class="fas fa-check"></i> Espera la convocatoria para la entrevista personal con el equipo de RRHH</li>
+            <li><i class="fas fa-check"></i> Una vez aprobada la entrevista, comenzarás el período de prácticas</li>
+          </ol>
+          <a href="#" class="btn btn-primary discord-cta-btn">
+            <i class="fab fa-discord"></i> Ir al Discord del servidor
+          </a>
+        </div>
+
+        <div class="result-next rejected-steps" *ngIf="!approved">
+          <h3><i class="fas fa-book-open"></i> Recomendaciones</h3>
+          <ul>
+            <li><i class="fas fa-chevron-right"></i> Repasa la normativa interna de la U.P.R. y el G.E.O.</li>
+            <li><i class="fas fa-chevron-right"></i> Estudia los procedimientos operativos, artículos 9 al 14</li>
+            <li><i class="fas fa-chevron-right"></i> Revisa el régimen disciplinario y los tipos de faltas</li>
+          </ul>
+        </div>
+
+        <!-- Revisión de respuestas -->
+        <div class="result-actions">
+          <button class="btn btn-outline" (click)="showAnswers = !showAnswers">
+            <i class="fas fa-eye"></i> {{ showAnswers ? 'Ocultar' : 'Ver' }} respuestas
+          </button>
+          <button class="btn btn-primary" (click)="retryExam()">
+            <i class="fas fa-rotate-right"></i> Volver a intentar
+          </button>
+        </div>
+
+        <!-- Revisión detallada -->
+        <div class="answers-review" *ngIf="showAnswers">
+          <h3><i class="fas fa-clipboard-list"></i> Revisión del examen</h3>
+          <div class="review-item" *ngFor="let q of questions; let i = index"
+               [class.correct]="q.selected !== null && q.answers[q.selected].correct"
+               [class.wrong]="q.selected === null || !q.answers[q.selected!].correct">
+            <div class="review-header">
+              <span class="review-num">{{ i + 1 }}</span>
+              <span class="review-category">{{ q.category }}</span>
+              <span class="review-result correct-tag" *ngIf="q.selected !== null && q.answers[q.selected].correct">
+                <i class="fas fa-check"></i> Correcta
+              </span>
+              <span class="review-result wrong-tag" *ngIf="q.selected === null || !q.answers[q.selected!].correct">
+                <i class="fas fa-xmark"></i> {{ q.selected === null ? 'Sin responder' : 'Incorrecta' }}
+              </span>
+            </div>
+            <p class="review-question">{{ q.text }}</p>
+            <div class="review-answers">
+              <div *ngFor="let a of q.answers; let ai = index"
+                   class="review-answer"
+                   [class.correct-answer]="a.correct"
+                   [class.selected-wrong]="q.selected === ai && !a.correct">
+                <span class="answer-letter">{{ ['A','B','C','D'][ai] }}</span>
+                <span>{{ a.text }}</span>
+                <i class="fas fa-check" *ngIf="a.correct"></i>
+                <i class="fas fa-xmark" *ngIf="q.selected === ai && !a.correct"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

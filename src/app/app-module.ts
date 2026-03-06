@@ -13,6 +13,7 @@ import { ApplicationForm } from './components/application-form/application-form'
 import { Footer } from './components/footer/footer';
 import { Units } from './components/units/units';
 import { PoliceExam } from './components/police-exam/police-exam';
+import { Uniforms } from './components/uniforms/uniforms';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PoliceExam } from './components/police-exam/police-exam';
     Footer,
     Units,
     PoliceExam,
+    Uniforms,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners()],

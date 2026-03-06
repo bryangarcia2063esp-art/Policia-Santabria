@@ -1,0 +1,89 @@
+<section class="uniforms-section" id="uniforms">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Código de Vestimenta</span>
+      <h2 class="section-title">Uniformes <span>Policiales</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Indumentaria oficial por rango del Cuerpo Nacional de Policía de Santabria</p>
+    </div>
+
+    <!-- Gender toggle -->
+    <div class="gender-toggle">
+      <button class="gender-btn" [class.active]="activeGender === 'male'" (click)="activeGender = 'male'">
+        <i class="fas fa-mars"></i> Masculino
+      </button>
+      <button class="gender-btn" [class.active]="activeGender === 'female'" (click)="activeGender = 'female'">
+        <i class="fas fa-venus"></i> Femenino
+      </button>
+    </div>
+
+    <!-- Female notice -->
+    <div class="female-notice" *ngIf="activeGender === 'female'">
+      <i class="fas fa-circle-info"></i>
+      <p>Los códigos de vestimenta femenina utilizan los mismos valores de rango que el uniforme masculino. Las imágenes de referencia femeninas serán añadidas próximamente.</p>
+    </div>
+
+    <!-- Uniform cards grid -->
+    <div class="uniforms-grid">
+      <div class="uniform-card" *ngFor="let u of uniforms">
+
+        <!-- Card header -->
+        <div class="uniform-card-header" [style.--rank-color]="u.color">
+          <div class="rank-icon-wrapper">
+            <i [class]="u.badge"></i>
+          </div>
+          <h3 class="rank-name">{{ u.rank }}</h3>
+        </div>
+
+        <!-- Image placeholder / future image -->
+        <div class="uniform-image-area">
+          <ng-container *ngIf="u.image; else placeholder">
+            <img [src]="u.image" [alt]="'Uniforme ' + u.rank" class="uniform-img" />
+          </ng-container>
+          <ng-template #placeholder>
+            <div class="img-placeholder">
+              <div class="placeholder-inner">
+                <i class="fas fa-person"></i>
+                <span>{{ activeGender === 'male' ? 'Imagen Masculina' : 'Imagen Femenina' }}</span>
+                <span class="placeholder-sub">Próximamente</span>
+              </div>
+            </div>
+          </ng-template>
+          <div class="gender-badge" [class.male]="activeGender === 'male'" [class.female]="activeGender === 'female'">
+            <i [class]="activeGender === 'male' ? 'fas fa-mars' : 'fas fa-venus'"></i>
+            {{ activeGender === 'male' ? 'Masculino' : 'Femenino' }}
+          </div>
+        </div>
+
+        <!-- Clothing codes table -->
+        <div class="uniform-codes">
+          <div class="codes-title">
+            <i class="fas fa-list"></i> Códigos de Vestimenta
+          </div>
+          <div class="codes-table">
+            <div class="code-row" *ngFor="let item of u.items">
+              <div class="code-slot">
+                <i [class]="getSlotIcon(item.slot)"></i>
+                <span>{{ item.slot }}</span>
+              </div>
+              <div class="code-values">
+                <span class="code-badge item-code">{{ item.code }}</span>
+                <span class="code-sep">·</span>
+                <span class="code-badge item-color">Color {{ item.color }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom note -->
+    <div class="uniforms-note">
+      <i class="fas fa-triangle-exclamation"></i>
+      <p>El incumplimiento del código de vestimenta oficial puede constituir una <strong>falta leve</strong> según el Art. 13 del Reglamento Interno. Usa siempre el uniforme correspondiente a tu rango actual.</p>
+    </div>
+
+  </div>
+</section>
